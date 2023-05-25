@@ -1,95 +1,112 @@
-// import { useState, useEffect } from 'react';
-// import { nanoid } from 'nanoid';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-// import ContactItem from './ContactItem/ContactItem';
-import Finder from './Finder/Finder';
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import { Route, Routes } from 'react-router-dom';
+import { lazy, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import authOperations from '../redux/auth/auth-operations';
+import authSelectors from '../redux/auth/auth-selectors';
 
-const mainStyle = {
-  // height: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'left',
-  fontSize: 20,
-  color: '#3d2f26ed',
-  marginLeft: '30px',
-};
+import PrivateRoute from './Routs/PrivateRoute';
+import PublicRoute from './Routs/PublicRoute';
 
-const App = () => {
+import { Layout } from './Layout';
+
+const HomeView = lazy(() => import('../views/Home'));
+const Register = lazy(() => import('../views/Register'));
+const Login = lazy(() => import('../views/Login'));
+const Contacts = lazy(() => import('../views/Contacts'));
+const NotFound = lazy(() => import('../views/NotFound'));
+
+export const App = () => {
+  const dispatch = useDispatch();
+
+  const isFetchingCurrentUser = useSelector(
+    authSelectors.getIsFetchingCurrentUser
+  );
+
+  console.log(isFetchingCurrentUser);
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
-    <section style={mainStyle}>
-      <h1>Phonebook</h1>
-      <ContactForm />
+    !isFetchingCurrentUser && (
+      <>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <PublicRoute>
+                  <HomeView />
+                </PublicRoute>
+              }
+            />
 
-      <h2>Contacts</h2>
-      <Finder />
-      <ContactList />
-    </section>
+            <Route
+              path="/register"
+              element={
+                <PublicRoute restricted>
+                  <Register />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/login"
+              element={
+                <PublicRoute restricted>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute>
+                  <Contacts />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+        <ToastContainer />
+      </>
+    )
   );
 };
-export default App;
 
-// const App = () => {
-//   const [filter, setFilter] = useState('');
+// ______________________________________________________
 
-//   const [contacts, setContacts] = useState(
-//     JSON.parse(localStorage.getItem('contacts')) ?? []
-//   );
+// import ContactForm from './ContactForm/ContactForm';
+// import ContactList from './ContactList/ContactList';
 
-//   useEffect(() => {
-//     localStorage.setItem('contacts', JSON.stringify(contacts));
-//   }, [contacts]);
+// import Finder from './Finder/Finder';
 
-//   const addContact = (name, number) => {
-//     const contact = {
-//       id: nanoid(),
-//       name,
-//       number,
-//     };
+// const mainStyle = {
 
-//     const enterContacts = contacts.some(
-//       i =>
-//         (i.name === contact.name.toLowerCase() &&
-//           i.number === contact.number) ||
-//         i.number === contact.number
-//     );
-//     enterContacts
-//       ? alert(`${name} or ${number} is already in contacts`)
-//       : setContacts([contact, ...contacts]);
-//   };
-
-//   const getListContacts = () => {
-//     return contacts.filter(contact =>
-//       contact.name.toLowerCase().includes(filter.toLowerCase())
-//     );
-//   };
-
-//   const changeFilter = event => {
-//     setFilter(event.target.value);
-//   };
-
-//   const deleteContact = id => {
-//     setContacts(contacts.filter(contact => contact.id !== id));
-//     setFilter('');
-//   };
-
-//   const visibleContact = getListContacts();
-
-//   return (
-//     <div style={mainStyle}>
-//       <h2>Phonebook</h2>
-//       <ContactForm onSubmit={addContact} />
-//       <h3>Contacts</h3>
-//       <Finder filter={filter} onChange={changeFilter} />
-//       <ContactList>
-//         <ContactItem
-//           contacts={visibleContact}
-//           deleteContactOn={deleteContact}
-//         />
-//       </ContactList>
-//     </div>
-//   );
+//   display: 'flex',
+//   flexDirection: 'column',
+//   justifyContent: 'center',
+//   alignItems: 'left',
+//   fontSize: 20,
+//   color: '#3d2f26ed',
+//   marginLeft: '30px',
 // };
 
+// const App = () => {
+//   return (
+//     <section style={mainStyle}>
+//       <h1>Phonebook</h1>
+//       <ContactForm />
+
+//       <h2>Contacts</h2>
+//       <Finder />
+//       <ContactList />
+//     </section>
+//   );
+// };
 // export default App;
