@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { infoToast } from '../../components/Toasts';
+import { infoToast, successToast } from '../../components/Toasts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
@@ -40,6 +40,7 @@ const logOut = createAsyncThunk('auth/logout', async () => {
   try {
     await axios.post('/users/logout');
     token.unset();
+    successToast('You are logout, see you later.');
   } catch (error) {
     console.log(error.message);
   }

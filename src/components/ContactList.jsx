@@ -7,6 +7,7 @@ import { contactsOperations } from '../redux/contacts/contactsOperations';
 import { deleteToast } from './Toasts';
 import { useSelector } from 'react-redux';
 import authSelectors from '../redux/auth/auth-selectors';
+import { Button } from '@chakra-ui/button';
 
 export const ContactsList = () => {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
@@ -42,7 +43,7 @@ export const ContactsList = () => {
                 <li className={s.item} key={id}>
                   <h3 className={s.item__name}>{name}:</h3>
                   <p className={s.item__name}>{number}</p>
-                  <button
+                  {/* <button
                     className={s.user__btn}
                     type="button"
                     onClick={() => {
@@ -52,7 +53,19 @@ export const ContactsList = () => {
                     }}
                   >
                     Delete
-                  </button>
+                  </button> */}
+                  <Button
+                    colorScheme="red"
+                    size="md"
+                    type="button"
+                    onClick={() => {
+                      deleteContact(id);
+                      deleteToast(`${name} tel:${number} is deleted`);
+                      setFilter('');
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </li>
               );
             })}

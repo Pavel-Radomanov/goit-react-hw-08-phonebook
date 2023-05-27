@@ -17,7 +17,7 @@
   row-gap: 15px;
   flex-direction: column;
   padding: 100px var(--glob-padding);
-  /* background-image: url(../components/images/telephone.jpeg); */
+  background-image: url(./components/Images/village-g208d94a36_640.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -79,7 +79,7 @@
 
 .user__name {
   font-weight: 800;
-  font-size: 35px;
+  font-size: 30px;
   text-shadow: 0px 2px 1px rgb(107 84 102);
   transition-duration: 800ms;
   color: var(--navlink__color);
@@ -97,8 +97,7 @@
   transform: scale(1.1);
 }
 
-.user__link,
-.user__smile {
+.user__link {
   font-weight: 700;
   font-size: 25px;
   transition-duration: 800ms;
@@ -137,8 +136,8 @@
 .home__linc:hover,
 .active {
   margin-right: 20px;
-  font-size: 35px;
-  text-shadow: 0px 2px 1px rgb(178 146 171);
+  font-size: 30px;
+  text-shadow: 0px 2px 1px rgb(170, 142, 15);
   font-weight: 800;
   transform: scale(1.1);
 }
@@ -190,4 +189,22 @@ input:focus {
   font-size: 20px;
   font-weight: 700;
   color: var(--secondary__color);
+}
+.toast_message {
+  background: rgb(95, 95, 100);
+  color: white;
+}
+.toast_success {
+  background: rgb(221, 149, 66);
+  color: grey;
+}
+.toast_error {
+  background: rgb(176, 83, 204);
+  color: black;
+}
+.pixabay {
+  font-size: 10px;
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }

@@ -3,6 +3,7 @@ import s from '../Styles.module.css';
 import { useState } from 'react';
 import { useContacts } from './Hooks/hooks';
 import { infoToast, successToast } from './Toasts';
+import { Button } from '@chakra-ui/button';
 
 export const ContacstForm = () => {
   const { contacts, addContact } = useContacts();
@@ -64,9 +65,12 @@ export const ContacstForm = () => {
           required
           onChange={handleChange}
         />
-        <button type="submit " className={s.form__btn}>
+        {/* <button type="submit " className={s.form__btn}>
           Add contact
-        </button>
+        </button> */}
+        <Button colorScheme="blue" size="lg" type="submit">
+          Add contact
+        </Button>
       </form>
     </div>
   );

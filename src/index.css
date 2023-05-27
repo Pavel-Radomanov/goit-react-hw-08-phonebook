@@ -1,18 +1,18 @@
 /* @import-normalize;  */
 /* bring in normalize.css styles */
 :root {
-  --transition__duration: 800ms;
-  --bg__color: rgba(178, 146, 171, 0.742);
+  --transition__duration: 900ms;
+  --bg__color: rgba(24, 90, 167, 0.742);
   --navlink__color: rgba(241, 231, 239, 0.976);
-  --secondary__color: rgba(51, 51, 51, 0.8);
+  --secondary__color: rgba(56, 49, 17, 0.8);
   --secondary__light: rgba(51, 51, 51, 0.584);
   --glob-padding: 100px;
 
   --navlink__hover: #ececf1;
 
-  --btn__red: rgba(255, 0, 0, 0.2);
+  /* --btn__red: rgba(255, 0, 0, 0.2);
   --btn__green: rgba(79, 183, 93, 0.2);
-  --btn__shadow: 0 0 2px #333;
+  --btn__shadow: 0 0 2px #333; */
 }
 
 *,

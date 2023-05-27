@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+// import { deleteToast } from '../../components/Toasts';
 import axios from 'axios';
 
 const getContacts = createAsyncThunk('contacts/fetchContacts', async () => {
@@ -24,6 +25,7 @@ const addContact = createAsyncThunk('contacts/add', async contact => {
 const deleteContact = createAsyncThunk('contacts/delete', async id => {
   try {
     await axios.delete(`/contacts/${id}`);
+    // deleteToast('The contact is deleted');
     return id;
   } catch (error) {
     console.log(error);

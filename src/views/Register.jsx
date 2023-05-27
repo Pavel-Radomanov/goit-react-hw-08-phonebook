@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import authOperations from '../redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
-// import s from '../Styles.module';
+import { Button } from '@chakra-ui/button';
+
 import s from '../Styles.module.css';
 
 const Register = () => {
@@ -62,10 +63,23 @@ const Register = () => {
           placeholder="password"
           onChange={handleChange}
         />
-        <button type="submit " className={s.form__btn}>
+        {/* <button type="submit " className={s.form__btn}>
           Registration
-        </button>
+        </button> */}
+        <Button colorScheme="yellow" size="lg" type="submit">
+          Registration
+        </Button>
       </form>
+      <p className={s.pixabay}>
+        <div>Image by</div>
+        <a href="https://pixabay.com/users/jarmoluk-143740/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=264776">
+          Michal Jarmoluk
+        </a>
+        <div>from </div>
+        <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=264776">
+          Pixabay
+        </a>
+      </p>
     </div>
   );
 };

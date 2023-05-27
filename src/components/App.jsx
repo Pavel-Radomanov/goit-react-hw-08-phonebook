@@ -5,6 +5,7 @@ import { lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from '../redux/auth/auth-operations';
 import authSelectors from '../redux/auth/auth-selectors';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import PrivateRoute from './Routs/PrivateRoute';
 import PublicRoute from './Routs/PublicRoute';
@@ -33,47 +34,49 @@ export const App = () => {
   return (
     !isFetchingCurrentUser && (
       <>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                <PublicRoute>
-                  <HomeView />
-                </PublicRoute>
-              }
-            />
+        <ChakraProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={
+                  <PublicRoute>
+                    <HomeView />
+                  </PublicRoute>
+                }
+              />
 
-            <Route
-              path="/register"
-              element={
-                <PublicRoute restricted>
-                  <Register />
-                </PublicRoute>
-              }
-            />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute restricted>
+                    <Register />
+                  </PublicRoute>
+                }
+              />
 
-            <Route
-              path="/login"
-              element={
-                <PublicRoute restricted>
-                  <Login />
-                </PublicRoute>
-              }
-            />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute restricted>
+                    <Login />
+                  </PublicRoute>
+                }
+              />
 
-            <Route
-              path="/contacts"
-              element={
-                <PrivateRoute>
-                  <Contacts />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-        <ToastContainer />
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute>
+                    <Contacts />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+          <ToastContainer />
+        </ChakraProvider>
       </>
     )
   );
