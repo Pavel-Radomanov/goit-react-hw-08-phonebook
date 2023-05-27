@@ -52,7 +52,7 @@ const Login = () => {
         {/* <button type="submit " className={s.form__btn}>
           Log in
         </button> */}
-        <Button colorScheme="yellow" size="lg" type="submit">
+        <Button colorScheme="blue" size="lg" type="submit">
           Log in
         </Button>
       </form>
